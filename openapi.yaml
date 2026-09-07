@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: Dummy API
+  description: Express API that exposes a dummy endpoint.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local development
+
+paths:
+  /api/dummy:
+    get:
+      operationId: getDummy
+      summary: Dummy health-style endpoint
+      description: Returns a static message and the current server timestamp.
+      tags:
+        - Dummy
+      responses:
+        "200":
+          description: Dummy payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DummyResponse"
+              example:
+                message: This is a dummy API endpoint for GitHub webhooks
+                timestamp: "2026-09-07T08:51:00.000Z"
+
+components:
+  schemas:
+    DummyResponse:
+      type: object
+      required:
+        - message
+        - timestamp
+      properties:
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+
+tags:
+  - name: Dummy
+    description: Sample endpoints
